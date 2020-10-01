@@ -1,0 +1,6 @@
+{
+  "type": "sqlite3",
+  "database": "./src/database/banco.sqlite",
+  "entities": "./src/database/migration/*.ts",
+  "logging": true
+}
