@@ -7,4 +7,4 @@
 `yarn typeorm migration:run`
 
 ## Para iniciar o servidor
-`yarn dev:server
+`yarn dev:server`
