@@ -1,6 +1,10 @@
 {
-  "type": "sqlite3",
+  "type": "sqlite",
   "database": "./src/database/banco.sqlite",
-  "entities": "./src/database/migration/*.ts",
-  "logging": true
+  "migrations": [
+    "./src/database/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
 }
