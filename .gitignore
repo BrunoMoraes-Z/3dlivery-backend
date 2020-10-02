@@ -4,4 +4,4 @@ npm-debug.log
 yarn-error.log
 dist
 .vscode/
-src/database/*.sqlite
+*.sqlite
