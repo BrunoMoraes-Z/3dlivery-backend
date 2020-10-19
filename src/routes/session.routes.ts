@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import AuthenticateUserService from '../services/user/AuthenticateUserService';
-import { invalidCredentials } from '../errors';
+import AppError from '../errors/AppError';
 
 const usersRouter = Router();
 
@@ -13,7 +13,7 @@ usersRouter.post('/', async (request, response) => {
   const user = await authenticate.execute({ email, password });
 
   if (!user) {
-    return response.status(401).json(invalidCredentials);
+    throw new AppError('Incorrect email/password combination.', 401);
   }
 
   return response.json(user);

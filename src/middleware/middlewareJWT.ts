@@ -4,7 +4,7 @@ import { verify } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
 
-import { invalidJWT } from '../errors';
+import { invalidJWT } from '../errors/AppError';
 
 interface TokenPayload {
   iat: number;
