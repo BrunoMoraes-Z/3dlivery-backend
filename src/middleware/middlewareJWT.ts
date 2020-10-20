@@ -4,7 +4,8 @@ import { verify } from 'jsonwebtoken';
 
 import authConfig from '../config/auth';
 
-import { invalidJWT } from '../errors/AppError';
+import AppError from '../errors/AppError';
+
 
 interface TokenPayload {
   iat: number;
@@ -16,7 +17,7 @@ export default function ensureAuthenticated(request: Request, response: Response
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    return response.status(401).json(invalidJWT);
+    throw new AppError('Token invalido.', 401);
   }
 
   const [, token] = authHeader.split(' ');
@@ -30,6 +31,6 @@ export default function ensureAuthenticated(request: Request, response: Response
 
     return next();
   } catch {
-    return response.status(401).json(invalidJWT);
+    throw new AppError('Token invalido.', 401);
   }
 }
