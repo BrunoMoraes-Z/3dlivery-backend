@@ -10,9 +10,4 @@ routes.use('/users', usersRouter);
 routes.use('/providers', providersRouter);
 routes.use('/session', sessionsRouter);
 
-routes.get('/', (request, response) => {
-  return response.status(200).json({ ok: 'true' });
-});
-
-
 export default routes;

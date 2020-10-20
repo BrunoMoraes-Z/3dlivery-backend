@@ -1,6 +1,8 @@
 import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
+import AppError from '../../errors/AppError';
+
 import User from '../../models/User';
 import Provider from '../../models/Provider';
 
@@ -21,7 +23,7 @@ class CreateUserService {
 
 
     if (checkUserExists || checkEmailExists) {
-      return false;
+      throw new AppError('Email já está vinculado a uma conta de usuario', 400);
     }
 
     const hashedPassword = await hash(password, 8);
