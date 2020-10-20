@@ -11,3 +11,10 @@ routes.use('/providers', providersRouter);
 routes.use('/session', sessionsRouter);
 
 export default routes;
+
+/*
+localhost:3010/session - { post }
+localhost:3010/users { post, patch } 
+localhost:3010/providers { post, patch } 
+
+*/

@@ -1,7 +1,8 @@
-import { Router, request } from 'express';
+import { Router} from 'express';
 
 import CreateUserService from '../services/user/CreateUserService';
 import AlterUserService from '../services/user/AlterUserSerice';
+import ListAllProviders from '../services/user/ListAllProviders';
 
 import middlewareJwt from '../middleware/middlewareJWT';
 import AppError from '../errors/AppError';
@@ -44,5 +45,18 @@ usersRouter.patch('/', async (request, response) => {
 
   return response.status(200).json({status: "success", updatedUser});
 });
+
+usersRouter.get('/list-providers', async (request, response) => {
+
+  const service = new ListAllProviders();
+
+  const providers = await service.execute();
+
+  if (!providers) {
+    throw new AppError('Não existe nenhum provedor.', 400);
+  }
+
+  return response.status(200).json({status: 'success', providers});
+}); 
 
 export default usersRouter;
