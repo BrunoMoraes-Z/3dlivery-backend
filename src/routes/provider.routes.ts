@@ -2,10 +2,13 @@ import { Router } from 'express';
 
 import CreateProviderService from '../services/provider/CreateProviderService';
 import AppError from '../errors/AppError';
+import middlewareJwt from '../middleware/middlewareJWT';
 
-const usersRouter = Router();
+import AlterProviderService from '../services/provider/AlterProviderSerice';
 
-usersRouter.post('/', async (request, response) => {
+const providersRouter = Router();
+
+providersRouter.post('/', async (request, response) => {
   const { name, email, password } = request.body;
 
   const service = new CreateProviderService();
@@ -19,4 +22,22 @@ usersRouter.post('/', async (request, response) => {
   return response.json(provider);
 });
 
-export default usersRouter;
+providersRouter.use(middlewareJwt);
+
+providersRouter.patch('/', async (request, response) => {
+  const { name, email, password } = request.body;
+
+  const id = request.provider.id;
+
+  const service = new AlterProviderService();
+
+  const updatedProvider = await service.execute({ id, name, email, password });
+
+  if (!updatedProvider) {
+    throw new AppError('Erro ao cadastrar usuario.', 400);
+  }
+
+  return response.status(200).json(updatedProvider);
+});
+
+export default providersRouter;

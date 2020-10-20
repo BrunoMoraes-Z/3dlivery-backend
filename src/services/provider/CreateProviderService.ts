@@ -9,7 +9,7 @@ interface Request {
   password: string;
 }
 
-class CreateUserService {
+class CreateProviderService {
   public async execute({ name, email, password }: Request): Promise<any> {
     const repository = getRepository(Provider);
 
@@ -20,15 +20,15 @@ class CreateUserService {
     }
 
     const hashedPassword = await hash(password, 8);
-
     const provider = repository.create({ name, email, password: hashedPassword });
-
     console.log(provider)
-
     await repository.save(provider);
+
+
+    delete provider.password;
 
     return provider;
   }
 }
 
-export default CreateUserService;
+export default CreateProviderService;
