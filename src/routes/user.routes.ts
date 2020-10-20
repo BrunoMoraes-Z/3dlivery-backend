@@ -19,7 +19,7 @@ usersRouter.post('/', async (request, response) => {
     throw new AppError('Erro ao criar usuario.', 400);
   }
 
-  return response.json(user);
+  return response.status(200).json({status: "success", user});
 });
 
 usersRouter.use(middlewareJwt);
@@ -32,7 +32,7 @@ usersRouter.patch('/', async (request, response) => {
     throw new AppError('Favor enviar algum campo para atualização', 400);
   }
 
-  const id = request.user.id;
+  const id = request.id;
 
   const AlterUserSerice = new AlterUserService();
 

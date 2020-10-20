@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
 import User from '../../models/User';
+import Provider from '../../models/Provider';
 
 interface Request {
   name: string;
@@ -12,10 +13,14 @@ interface Request {
 class CreateUserService {
   public async execute({ name, email, password }: Request): Promise<User | false> {
     const userRepository = getRepository(User);
+    const providerRepository = getRepository(Provider);
 
     const checkUserExists = await userRepository.findOne({ where: { email } });
 
-    if (checkUserExists) {
+    const checkEmailExists = await providerRepository.findOne({ where: { email }});
+
+
+    if (checkUserExists || checkEmailExists) {
       return false;
     }
 
