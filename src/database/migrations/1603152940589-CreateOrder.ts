@@ -1,11 +1,11 @@
 import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
-export class Provider1602033475647 implements MigrationInterface {
+export class CreateOrder1603152940589 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-              name: 'providers',
+              name: 'orders',
               columns: [
                 {
                   name: 'id',
@@ -15,17 +15,19 @@ export class Provider1602033475647 implements MigrationInterface {
                   default: 'uuid_generate_v4()'
                 },
                 {
-                  name: 'name',
-                  type: 'varchar',
+                  name: 'id_user',
+                  type: 'string',
+                  isNullable: true,
                 },
                 {
-                  name: 'email',
-                  type: 'varchar',
-                  isUnique: true,
+                  name: 'id_provider',
+                  type: 'string',
+                  isNullable: true,
                 },
                 {
-                  name: 'password',
-                  type: 'varchar',
+                  name: 'id_drawing',
+                  type: 'string',
+                  isNullable: true,
                 },
                 {
                   name: 'created_at',
@@ -41,9 +43,24 @@ export class Provider1602033475647 implements MigrationInterface {
             }),
           );
 
-          await queryRunner.createForeignKey('appointments', new TableForeignKey({
-            name: 'AppointmentProvider',
-            columnNames: ['provider_id'],
+        await queryRunner.createForeignKey('orders', new TableForeignKey({
+            columnNames: ['id_provider'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'providers',
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE',
+        }));
+
+        await queryRunner.createForeignKey('orders', new TableForeignKey({
+            columnNames: ['id_drawing'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'drawings',
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE',
+        }));
+
+        await queryRunner.createForeignKey('orders', new TableForeignKey({
+            columnNames: ['id_user'],
             referencedColumnNames: ['id'],
             referencedTableName: 'users',
             onDelete: 'SET NULL',
@@ -52,7 +69,7 @@ export class Provider1602033475647 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('providers');
+        await queryRunner.dropTable('orders');
     }
 
 }

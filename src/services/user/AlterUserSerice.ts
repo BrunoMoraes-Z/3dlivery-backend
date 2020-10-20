@@ -14,11 +14,6 @@ interface Request {
 
 class AlterUserService {
   public async execute({id, name, email, password}: Request): Promise<User | false> {
-    console.log('teste')
-    if (!name && !email && !password) {
-      throw new AppError('Favor enviar algum campo para atualização', 400);
-    }
-
     const userRepository = getRepository(User);
 
     const user = await userRepository.findOne({ where: { id }}); 
@@ -35,11 +30,24 @@ class AlterUserService {
       }
     }
 
+    if (name) {
+      user.name = name;
+    }
+
+    if (email) {
+      user.email = email;
+    }
+
+    if (password) {
+      const hashedPassword = await hash(password, 8);
+      user.password = hashedPassword;
+    }
+
     const updated_at = new Date();
 
-    const hashedPassword = await hash(password, 8);
+    user.updated_at = updated_at;
 
-    const response = await userRepository.save({id, name, email, password: hashedPassword, updated_at});
+    const response = await userRepository.save(user);
 
     if (!response) {
       throw new AppError('Erro ao atualizar usuario.', 500);

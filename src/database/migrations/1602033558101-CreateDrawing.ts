@@ -5,7 +5,7 @@ export class CreateDrawing1602033558101 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
       await queryRunner.createTable(
         new Table({
-            name: 'drawing',
+            name: 'drawings',
             columns: [
               {
                 name: 'id',

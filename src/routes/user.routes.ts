@@ -28,6 +28,10 @@ usersRouter.use(middlewareJwt);
 usersRouter.patch('/', async (request, response) => {
   const { name, email, password } = request.body;
 
+  if (!name && !email && !password) {
+    throw new AppError('Favor enviar algum campo para atualização', 400);
+  }
+
   const id = request.user.id;
 
   const AlterUserSerice = new AlterUserService();
@@ -38,7 +42,7 @@ usersRouter.patch('/', async (request, response) => {
     throw new AppError('Erro ao cadastrar usuario.', 400);
   }
 
-  return response.status(200).json(updatedUser);
+  return response.status(200).json({status: "success", updatedUser});
 });
 
 export default usersRouter;
