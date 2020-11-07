@@ -1,10 +1,7 @@
 import { getRepository } from 'typeorm';
+
 import AppError from '../../errors/AppError';
-
-import User from '../../models/User';
 import Provider from '../../models/Provider';
-
-
 
 class ListAllProviders {
   public async execute(): Promise<Provider[]> {

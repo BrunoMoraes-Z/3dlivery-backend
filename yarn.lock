@@ -1427,6 +1427,11 @@ node-pre-gyp@^0.11.0:
     semver "^5.3.0"
     tar "^4"
 
+node-stl@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/node-stl/-/node-stl-0.7.1.tgz#aed79c91937e4415085544b345b12047f62bb07c"
+  integrity sha512-uKViToQR4khXIWQlGL5kXjJfNR8Iz3OlMKDmAOE2trbefriUydvhSFo7ROFfCGha0y3MW2ygPvvfCSQgHTqSsQ==
+
 "nopt@2 || 3":
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"

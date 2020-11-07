@@ -40,15 +40,16 @@ export class Provider1602033475647 implements MigrationInterface {
               ],
             }),
           );
-
-          await queryRunner.createForeignKey('appointments', new TableForeignKey({
-            name: 'AppointmentProvider',
-            columnNames: ['provider_id'],
-            referencedColumnNames: ['id'],
-            referencedTableName: 'users',
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE',
-        }));
+        
+        //  Estava dando erro ao criar as migrations.
+        //   await queryRunner.createForeignKey('appointments', new TableForeignKey({
+        //     name: 'AppointmentProvider',
+        //     columnNames: ['provider_id'],
+        //     referencedColumnNames: ['id'],
+        //     referencedTableName: 'users',
+        //     onDelete: 'SET NULL',
+        //     onUpdate: 'CASCADE',
+        // }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

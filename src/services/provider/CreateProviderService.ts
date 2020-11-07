@@ -21,9 +21,7 @@ class CreateProviderService {
 
     const hashedPassword = await hash(password, 8);
     const provider = repository.create({ name, email, password: hashedPassword });
-    console.log(provider)
     await repository.save(provider);
-
 
     delete provider.password;
 
