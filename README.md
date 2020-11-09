@@ -1,5 +1,7 @@
 # 3dlivery-backend
 
+# Para rodar o sistema precisar ter o node e yarn instalados para rodar o servidor
+
 ## Para baixar as dependência:
 `yarn`
 
