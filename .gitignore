@@ -5,3 +5,4 @@ yarn-error.log
 dist
 .vscode/
 *.sqlite
+temp/
