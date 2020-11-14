@@ -3,6 +3,9 @@ import multer from 'multer';
 
 import config from '../config/upload';
 import middlewareJwt from '../middleware/middlewareJWT';
+
+import CreateDrawingService from '../services/drawing/CreateDrawingService';
+
 import AppError from '../errors/AppError';
 
 const upload = multer(config);
@@ -19,9 +22,18 @@ router.post('/', upload.single('drawing'), async (request, response) => {
     throw new AppError('Formato do arquivo incorreto.', 400);
   }
 
-  console.log(request.file);
-
   return response.json({ status: 'OK' });
+});
+
+router.post('/create-drawing', async (request, response) => {
+  const { name, height, width } = request.body;
+
+  const createDrawing = new CreateDrawingService();
+
+  const drawing = await createDrawing.execute({ name, height, width });
+
+  return response.status(200).json(drawing);
+
 });
 
 export default router;
