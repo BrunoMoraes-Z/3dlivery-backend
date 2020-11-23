@@ -17,7 +17,25 @@ class CreateDrawingService {
       throw new AppError('Favor enviar todos os campos para criação de um desenho.', 400);
     }
 
-    const drawing = repository.create({name, height, width});
+    let cost = 10;
+
+    if (height <= 30 || width <= 30) {
+      cost = 100;
+    }
+
+    if (height <= 31 ||  height >= 70 || width <= 31 || width <= 70) {
+      cost = 200;
+    }
+
+    if (height <= 71 ||  height >= 120 || width <= 71 || width <= 120) {
+      cost = 350;
+    }
+
+    if (height < 121 || width <= 121) {
+      cost = 500;
+    }
+
+    const drawing = repository.create({name, height, width, cost});
     const response = await repository.save(drawing);
 
     if (!response) {

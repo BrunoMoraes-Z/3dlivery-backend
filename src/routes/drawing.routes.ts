@@ -33,7 +33,6 @@ router.post('/create-drawing', async (request, response) => {
   const drawing = await createDrawing.execute({ name, height, width });
 
   return response.status(200).json(drawing);
-
 });
 
 export default router;

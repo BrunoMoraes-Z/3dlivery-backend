@@ -27,6 +27,10 @@ export class CreateDrawing1602033558101 implements MigrationInterface {
                 type: 'float',
               },
               {
+                name: 'cost',
+                type: 'float',
+              },
+              {
                 name: 'created_at',
                 type: 'timestamp',
                 default: 'now()',

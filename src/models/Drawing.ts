@@ -14,12 +14,14 @@ class Drawings {
   @Column()
   width: number;
 
+  @Column()
+  cost: number;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
-
 }
 
 export default Drawings;
