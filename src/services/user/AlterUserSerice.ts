@@ -13,7 +13,7 @@ interface Request {
 }
 
 class AlterUserService {
-  public async execute({id, name, email, password}: Request): Promise<User | false> {
+  public async execute({id, name, email, password}: Request): Promise<User> {
     const userRepository = getRepository(User);
     const providerRepository = getRepository(Provider);
     
