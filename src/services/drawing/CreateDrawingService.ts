@@ -31,7 +31,7 @@ class CreateDrawingService {
       cost = 350;
     }
 
-    if (height < 121 || width <= 121) {
+    if (height >= 121 || width >= 121) {
       cost = 500;
     }
 
