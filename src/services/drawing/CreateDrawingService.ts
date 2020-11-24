@@ -23,11 +23,11 @@ class CreateDrawingService {
       cost = 100;
     }
 
-    if (height <= 31 ||  height >= 70 || width <= 31 || width <= 70) {
+    if (height >= 31 ||  height <= 70 || width >= 31 || width <= 70) {
       cost = 200;
     }
 
-    if (height <= 71 ||  height >= 120 || width <= 71 || width <= 120) {
+    if (height >= 71 ||  height <= 120 || width >= 71 || width <= 120) {
       cost = 350;
     }
 
