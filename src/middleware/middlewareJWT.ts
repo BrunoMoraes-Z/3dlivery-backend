@@ -20,10 +20,10 @@ export default function ensureAuthenticated(request: Request, response: Response
     throw new AppError('Token invalido.', 401);
   }
 
-  const [, token] = authHeader.split(' ');
+  //const [, token] = authHeader.split(' ');
 
   try {
-    const decoded = verify(token, authConfig.jwt.secret);
+    const decoded = verify(authHeader, authConfig.jwt.secret);
 
     const { sub } = decoded as TokenPayload;
 
