@@ -68,13 +68,11 @@ router.post('/create-drawing', async (request, response) => {
 });
 
 router.patch('/alter-drawing', async (request, response) => {
-  const { name, height, width } = request.body;
+  const { id, name, height, width } = request.body;
 
   if (!name && !height && !width) {
     throw new AppError('Favor enviar algum campo para atualização', 400);
   }
-
-  const id = request.id;
 
   const alterDrawingSerice = new AlterDrawingSerice();
 
@@ -87,8 +85,8 @@ router.patch('/alter-drawing', async (request, response) => {
   return response.status(200).json({status: "success", updatedUser});
 });
 
-router.patch('/delete-drawing', async (request, response) => {
-  const id = request.id;
+router.delete('/delete-drawing', async (request, response) => {
+  const { id } = request.body;
 
   const deleteDrawingSerice = new DeleteDrawingService();
 
