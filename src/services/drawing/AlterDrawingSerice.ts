@@ -38,11 +38,17 @@ class AlterDrawingService {
       cost = 500;
     }
 
-    drawing.name = name;
+    if (name) {
+      drawing.name = name;
+    }
 
-    drawing.height = height;
+    if (height) {
+      drawing.height = height;
+    }
 
-    drawing.width = width;
+    if (width) {
+      drawing.width = width;
+    }
 
     drawing.cost = cost;
 
@@ -50,7 +56,7 @@ class AlterDrawingService {
 
     drawing.updated_at = updated_at;
 
-    const response = await userRepository.save(drawing);
+    const response = await drawingRepository.save(drawing);
 
     if (!response) {
       throw new AppError('Erro ao atualizar desenho.', 500);
